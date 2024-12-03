@@ -15,3 +15,11 @@ std::size_t Expression::get_count_expressions() {
 }
 
 /* ************************* */
+bool Expression::isRoot(double x) const {
+    if (std::abs(Expression::operator()(x)) < Epsilon) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

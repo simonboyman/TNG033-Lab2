@@ -17,13 +17,18 @@ public:
     }
 
     // ADD OTHER MEMBER FUNCTIONS
-    friend std::ostream& operator<<(std::ostream& os, const Expression& aExpr); //type conversion
     
-    bool isRoot(double x) const; //??
+    
+    bool isRoot(double x) const; //const means this will not change anything, this is just check. promise
 
     virtual Expression* clone() const = 0; //should return pointer
 
-    virtual double operator()(double x) const = 0; //operator()(double x) is f(x). is pure virtual, meaning is abstract.
+    virtual double operator()(double x) const = 0; //operator()(double x) is f(x). is pure virtual, meaning is abstract. this means derived class NEEDS to implement operator. this is evaluate
+
+    friend std::ostream& operator<<(std::ostream& os, const Expression& aExpr) { //write out to output stream
+            aExpr.toString();
+            return(os);
+    }
 
     // Return number of existing instances of class Expression
     // Used only for debug purposes
@@ -40,7 +45,7 @@ protected:
         ++count_expressions;
     }
 
-    virtual void display(std::ostream& os) const = 0;
+    virtual std::string toString() const = 0;
 
     // total number of existing expressions -- only to help to detect bugs in the code
     static std::size_t count_expressions;
