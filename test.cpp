@@ -71,7 +71,7 @@ int main() {
         assert(std::string{p1} == std::string{"2.20 + 4.40 * X^1 - 8.00 * X^2 + 5.00 * X^3"});
 
         const Polynomial p2{v1};
-        // p2[3] = -4.4; // should not compile
+        //p2[3] = -4.4; // should not compile
 
         assert(Expression::get_count_expressions() == 2);
         assert(p2[2] == -2.0);
@@ -302,9 +302,9 @@ int main() {
                std::string{"2.00 - 3.00 * Log_10( -1.00 + 0.00 * X^1 + 1.00 * X^2 )"});
 
         Logarithm l3{l1, 1, 2, 10};
-
+        std::cout << Expression::get_count_expressions() << "\n";
         assert(Expression::get_count_expressions() == 8);
-
+            
         l1.set_base(3);  // should not modify l3
 
         // Test
@@ -436,14 +436,14 @@ int main() {
     // std::cout << "\nTEST PHASE 16:  Expression::operator=\n";
 
     {
-        /*
-        std::vector<double> v1{-1, 0, 1};
+        
+        /*std::vector<double> v1{-1, 0, 1};
         Expression* e1 = new Polynomial{v1};
 
         Expression* e2 = new Logarithm{};
 
-        *e1 = *e2; //<-- should not compile!!
-        */
+        *e1 = *e2; //<-- should not compile!!*/
+        
     }
 
     std::cout << "\nSuccess!!\n";

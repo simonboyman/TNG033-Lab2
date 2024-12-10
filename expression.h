@@ -6,6 +6,7 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 
 constexpr double Epsilon = 1.0e-5;
 
@@ -18,16 +19,20 @@ public:
 
     // ADD OTHER MEMBER FUNCTIONS
     
-    
-    bool isRoot(double x) const; //const means this will not change anything, this is just check. promise
+    bool isRoot(double x) const; //const means this will not change anything, this is just check. promises not to change any values
 
     virtual Expression* clone() const = 0; //should return pointer
 
-    virtual double operator()(double x) const = 0; //operator()(double x) is f(x). is pure virtual, meaning is abstract. this means derived class NEEDS to implement operator. this is evaluate
+    virtual double operator()(double x) const = 0; //evaluate
+    //operator()(double x) is f(x). is pure virtual, meaning is abstract. this means derived class NEEDS to implement operator.
+
+    operator std::string() const {
+        return toString();
+    }
 
     friend std::ostream& operator<<(std::ostream& os, const Expression& aExpr) { //write out to output stream
-            aExpr.toString();
-            return(os);
+        os << std::fixed << std::setprecision(2) << aExpr.toString();
+        return os;
     }
 
     // Return number of existing instances of class Expression
@@ -43,9 +48,11 @@ protected:
     // Copy constructor
     Expression(const Expression&) {
         ++count_expressions;
-    }
+    }    
 
     virtual std::string toString() const = 0;
+
+    Expression& operator=(const Expression&) const = delete; //this code prevents direct assignment
 
     // total number of existing expressions -- only to help to detect bugs in the code
     static std::size_t count_expressions;
