@@ -11,7 +11,7 @@
 // ADD implementation of the member functions for class Polynomial
 Polynomial::Polynomial(const std::vector<double>& v) {
 	for (double e : v) {
-		this->coeff.push_back(e); 
+		coeff.push_back(e); 
 	}
 }
 
@@ -27,7 +27,7 @@ double Polynomial::operator()(double x) const {
 	return sum;
 }
 
-Polynomial::Polynomial(const Polynomial& poly) {
+Polynomial::Polynomial(const Polynomial& poly) { //copy constructor
 	for (double e : poly.coeff) {
 		this->coeff.push_back(e); 
 	}
@@ -35,7 +35,7 @@ Polynomial::Polynomial(const Polynomial& poly) {
 
 Polynomial& Polynomial::operator+=(Polynomial rhs) {
 	for (int i = 0; i < std::ssize(rhs.coeff); i++) {
-		if (i >= this->coeff.size()) {
+		if (i > std::ssize(coeff) || i == std::ssize(coeff)) {
 			this->coeff.push_back(rhs.coeff[i]);
 		}
 		else {

@@ -31,7 +31,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Expression& aExpr) { //write out to output stream
-        os << std::fixed << std::setprecision(2) << aExpr.toString();
+        os << aExpr.operator std::string();
         return os;
     }
 

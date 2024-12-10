@@ -10,7 +10,7 @@
 #include <iomanip>
 
 // ADD implementation of the member functions for class Logarithm
-Logarithm::Logarithm() : c1{0}, c2{1}, b{2}, E{new Polynomial{{0,1}}} {}
+Logarithm::Logarithm() : Expression(), c1{0.0}, c2{1.0}, b{2}, E{new Polynomial{{0,1}}} {}
 
 Logarithm::Logarithm(Expression& E_arg, double c1_arg, double c2_arg, int b_arg) {
 	E = E_arg.clone();
@@ -19,11 +19,11 @@ Logarithm::Logarithm(Expression& E_arg, double c1_arg, double c2_arg, int b_arg)
 	b = b_arg;
 }
 
-Logarithm::Logarithm(const Logarithm& L) {
+Logarithm::Logarithm(const Logarithm& L) { //copy constructor
 	c1 = L.c1;
 	c2 = L.c2;
 	b = L.b;
-	E = (*L.E).clone(); //varför clone här?
+	E = (*L.E).clone();
 }
 
 Logarithm* Logarithm::clone() const {
@@ -31,10 +31,11 @@ Logarithm* Logarithm::clone() const {
 }
 
 double Logarithm::operator()(double x) const {
-	return (c1 + c2 * (log(E->operator()(x)) / log(b)));
+	return (c1 + c2 * (log(E->operator()(x)) / log(b))); //points to operator, whatever form it is. polynomial/logarithm.
+	//can loop until its polynomial
 }
 
-Logarithm& Logarithm::operator=(Logarithm lhs) {
+Logarithm& Logarithm::operator=(Logarithm lhs) { //assignment operator
 	c1 = lhs.c1;
 	c2 = lhs.c2;
 	b = lhs.b;

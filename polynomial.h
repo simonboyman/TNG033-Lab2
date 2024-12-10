@@ -13,8 +13,7 @@ class Polynomial : public Expression {
 public:
 	Polynomial(const std::vector<double>& v); //create polynomial from vector
 
-	Polynomial(double real) : Expression{} {
-		coeff.push_back(real);
+	Polynomial(double real) : Expression{}, coeff{ real } {
 	}//convert real to polynomial
 
 	Polynomial(const Polynomial& poly);
@@ -40,7 +39,8 @@ public:
 		return temp;
 	} //p + q
 
-	friend Polynomial operator+(Polynomial& p, double d) {
+	friend Polynomial operator+(Polynomial& p, double d) { //friend because only use arguments, no this. so needs access
+		//to private
 		return p + Polynomial(d);
 	}//p + d
 

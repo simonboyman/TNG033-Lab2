@@ -18,9 +18,6 @@ public:
 	~Logarithm() override { //need to delete E because it is pointer
 		delete E;
 		E = nullptr;
-		c1 = 0;
-		c2 = 0;
-		b = 0;
 	}
 
 	Logarithm(const Logarithm& L); //copy constructor
@@ -32,9 +29,7 @@ public:
 	double operator()(double x) const override;
 
 	void set_base(int c) {
-		if (c > 1) {
-			b = c;
-		}
+		b = c;
 	}
 
 protected:
